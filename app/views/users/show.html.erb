@@ -1,0 +1,135 @@
+<div class="max-w-4xl mx-auto p-6">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold text-gray-800">
+      👤 <%= @is_current_user ? "My Profile" : "#{@user.display_name}'s Profile" %>
+    </h1>
+    <%= link_to "← Back to Friends", friendships_path, 
+               class: "px-4 py-2 bg-gray-600 text-white font-medium rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-200" %>
+  </div>
+
+  <!-- User Info Card -->
+  <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+    <div class="px-6 py-6">
+      <div class="flex items-center space-x-6">
+        <div class="flex-shrink-0">
+          <div class="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center">
+            <span class="text-emerald-600 font-bold text-2xl">
+              <%= @user.display_name.first(2).upcase %>
+            </span>
+          </div>
+        </div>
+        <div class="flex-1">
+          <h2 class="text-2xl font-bold text-gray-900"><%= @user.display_name %></h2>
+          <p class="text-gray-600"><%= @user.email %></p>
+          <div class="mt-2 flex items-center space-x-4 text-sm text-gray-500">
+            <span>📊 Tracking <%= @stocks.count %> stocks</span>
+            <span>👥 <%= @user.friends.count %> friends</span>
+            <span>📅 Joined <%= @user.created_at.strftime("%B %Y") %></span>
+          </div>
+        </div>
+        <div class="flex-shrink-0">
+          <% unless @is_current_user %>
+            <% if @is_friend %>
+              <%= button_to "Remove Friend", friendship_path(@friendship), 
+                           method: :delete,
+                           data: { confirm: "Remove #{@user.display_name} from your friends?" },
+                           class: "px-4 py-2 bg-red-600 text-white font-medium rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition duration-200" %>
+            <% else %>
+              <%= button_to "Add Friend", friendships_path, 
+                           method: :post,
+                           params: { friend_id: @user.id },
+                           class: "px-4 py-2 bg-emerald-600 text-white font-medium rounded-md hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 transition duration-200" %>
+            <% end %>
+          <% else %>
+            <%= link_to "Edit Profile", edit_user_registration_path, 
+                       class: "px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- User's Stocks Portfolio -->
+  <div class="bg-white rounded-lg shadow-md overflow-hidden">
+    <div class="px-6 py-4 border-b border-gray-200">
+      <div class="flex items-center justify-between">
+        <h2 class="text-xl font-semibold text-gray-800">
+          <%= @is_current_user ? "Your Portfolio" : "#{@user.display_name}'s Portfolio" %> 
+          (<%= @stocks.count %> stocks)
+        </h2>
+        <div class="flex items-center space-x-2">
+          <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+          <span class="text-sm text-green-600 font-medium">Real-time data</span>
+        </div>
+      </div>
+    </div>
+    
+    <% if @stocks.any? %>
+      <div class="divide-y divide-gray-200">
+        <% @stocks.each do |stock| %>
+          <div class="px-6 py-4 hover:bg-gray-50 transition duration-200">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-4">
+                <div class="flex-shrink-0">
+                  <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                    <span class="text-blue-600 font-semibold text-sm"><%= stock.ticker[0..1] %></span>
+                  </div>
+                </div>
+                <div>
+                  <%= link_to stock_path(stock.ticker), class: "block hover:text-blue-600 transition duration-200" do %>
+                    <div class="text-lg font-semibold text-gray-900"><%= stock.ticker %></div>
+                    <div class="text-sm text-gray-600"><%= stock.name %></div>
+                  <% end %>
+                </div>
+              </div>
+              <div class="text-right">
+                <div class="text-lg font-bold text-green-600">$<%= number_with_precision(stock.last_price, precision: 2) %></div>
+                <div class="text-sm text-gray-500">Current Price</div>
+                <% if @is_current_user %>
+                  <div class="mt-1">
+                    <%= button_to "Remove", untrack_stock_path(stock), method: :delete, 
+                                 data: { confirm: "Remove #{stock.ticker} from your portfolio?" },
+                                 class: "text-xs text-red-600 hover:text-red-800 bg-transparent border-none p-0 cursor-pointer" %>
+                  </div>
+                <% elsif current_user.stocks.include?(stock) %>
+                  <div class="text-xs text-green-600 mt-1">✓ You also track this</div>
+                <% else %>
+                  <div class="mt-1">
+                    <%= button_to "Track This", track_stock_path(stock), method: :post,
+                                 class: "text-xs text-blue-600 hover:text-blue-800 bg-transparent border-none p-0 cursor-pointer underline" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="px-6 py-12 text-center">
+        <div class="text-gray-400 text-6xl mb-4">📊</div>
+        <h3 class="text-lg font-medium text-gray-900 mb-2">
+          <%= @is_current_user ? "No stocks in your portfolio yet" : "#{@user.display_name} hasn't added any stocks yet" %>
+        </h3>
+        <% if @is_current_user %>
+          <p class="text-gray-600 mb-4">Start building your portfolio by browsing and tracking stocks.</p>
+          <%= link_to "Browse Stocks", browse_stocks_path, 
+                     class: "inline-flex items-center px-4 py-2 bg-emerald-600 text-white font-medium rounded-md hover:bg-emerald-700 transition duration-200" %>
+        <% else %>
+          <p class="text-gray-600">This user's portfolio is empty.</p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <% unless @is_current_user %>
+    <div class="mt-6 text-center">
+      <p class="text-sm text-gray-500">
+        <% if @is_friend %>
+          You are friends with <%= @user.display_name %> since <%= @friendship.created_at.strftime("%B %Y") %>
+        <% else %>
+          Connect with <%= @user.display_name %> to follow their portfolio updates
+        <% end %>
+      </p>
+    </div>
+  <% end %>
+</div>
