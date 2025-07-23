@@ -56,8 +56,17 @@
         <%= link_to "← Back to Portfolio", stocks_path, 
                    class: "px-6 py-2 bg-gray-600 text-white font-medium rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-200" %>
         
-        <%= button_to "🔄 Refresh Price", stock_path(@stock.ticker), method: :patch,
-                     class: "px-6 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200" %>
+        <% if @user_stock %>
+          <%= button_to "🔄 Refresh Price", stock_path(@stock.ticker), method: :patch,
+                       class: "px-6 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200" %>
+          
+          <%= button_to "Remove from Portfolio", untrack_stock_path(@stock), method: :delete,
+                     data: { confirm: "Remove #{@stock.ticker} from your portfolio?" },
+                     class: "px-6 py-2 bg-red-600 text-white font-medium rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition duration-200" %>
+        <% else %>
+          <%= button_to "Add to Portfolio", track_stock_path(@stock), method: :post,
+                     class: "px-6 py-2 bg-green-600 text-white font-medium rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition duration-200" %>
+        <% end %>
       </div>
     </div>
   </div>
