@@ -14,12 +14,18 @@ class StocksController < ApplicationController
 
   def create
     ticker = params[:ticker].upcase
+    
+    if ticker.blank?
+      redirect_to stocks_path, alert: "Please enter a stock ticker symbol"
+      return
+    end
+    
     @stock = Stock.update_or_create_from_api(ticker)
 
     if @stock
       redirect_to stock_path(@stock.ticker), notice: "#{ticker} added to your portfolio!"
     else
-      redirect_to stocks_path, alert: "Failed to add #{ticker} to your portfolio"
+      redirect_to stocks_path, alert: "Unable to fetch data for #{ticker}. Please check the ticker symbol and try again."
     end
   end
 
@@ -27,8 +33,12 @@ class StocksController < ApplicationController
     @stock = Stock.find_by(ticker: params[:id].upcase)
     
     if @stock
-      @stock.update_price!
-      redirect_to stock_path(@stock.ticker), notice: "#{@stock.ticker} price updated!"
+      updated_stock = @stock.update_price!
+      if updated_stock == @stock && @stock.previous_changes.empty?
+        redirect_to stock_path(@stock.ticker), alert: "Unable to update #{@stock.ticker} price. Please try again later."
+      else
+        redirect_to stock_path(@stock.ticker), notice: "#{@stock.ticker} price updated!"
+      end
     else
       redirect_to stocks_path, alert: "Stock not found"
     end

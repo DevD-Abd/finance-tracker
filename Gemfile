@@ -65,7 +65,5 @@ group :test do
 end
 
 gem "devise", "~> 4.9"
-gem 'alphavantage'
 gem 'httparty'
-gem 'dotenv-rails', groups: [:development, :test] # if not already added
-gem 'ffi', platforms: [:mingw, :x64_mingw, :mswin] # Required for Windows compatibility
+gem 'dotenv-rails', groups: [:development, :test]

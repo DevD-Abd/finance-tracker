@@ -27,21 +27,22 @@ A modern Rails application for tracking your stock portfolio with real-time pric
 
 ## 📊 Real-Time Stock Data
 
-The application now provides **real-time stock data** using:
-- **Primary**: Alpha Vantage API (real market data) ✅ **ACTIVE**
-- **Secondary**: Yahoo Finance API (backup)
-- **Fallback**: Realistic simulation based on actual company data
+The application provides **real-time stock data** using:
+- **Alpha Vantage API** - Professional market data service
+- **Clean implementation** - No fallbacks or simulation data
+- **Real market prices** from major exchanges
 
 ### 🔴 Live Data Features:
-- **Real market prices** updated from Alpha Vantage
-- **Actual stock prices** from major exchanges
+- **Real market prices** from Alpha Vantage
 - **Rate limiting protection** (12-second delays between API calls)
-- **Automatic fallback** if APIs are unavailable
+- **Error handling** for API failures
+- **15 Major companies** pre-configured with proper names
 
-### 📈 API Usage:
-- **Free tier**: 5 API calls per minute, 500 per day
-- **Automatic delays** built-in to respect rate limits
-- **Smart caching** to minimize API usage
+### 📈 API Requirements:
+- **Alpha Vantage API Key** required (free tier available)
+- **5 API calls per minute** on free tier
+- **500 calls per day** on free tier
+- **Automatic rate limiting** built-in
 
 ## 🛠️ Rake Tasks
 
