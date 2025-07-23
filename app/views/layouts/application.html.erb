@@ -22,8 +22,11 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="bg-gray-100 text-gray-900 font-sans antialiased">
-  <p class="alert" >alert</p>
+  <body class="bg-white text-gray-900">
+  <%= render "layouts/navigation" %>
+  <%= render "layouts/flash" %>
+  <main class="container mx-auto px-4 py-6">
     <%= yield %>
+  </main>
   </body>
 </html>
