@@ -14,11 +14,13 @@
           <% if user_signed_in? %>
             <!-- User is logged in -->
             <span class="text-emerald-100 text-sm">
-              Welcome, <%= current_user.email %>
+              Welcome, <%= current_user.display_name %>
             </span>
             <%= link_to "My Portfolio", stocks_path, 
                 class: "text-white hover:bg-emerald-600 hover:text-emerald-100 px-3 py-2 rounded-md text-sm font-medium transition duration-200" %>
             <%= link_to "Browse Stocks", browse_stocks_path, 
+                class: "text-white hover:bg-emerald-600 hover:text-emerald-100 px-3 py-2 rounded-md text-sm font-medium transition duration-200" %>
+            <%= link_to "Edit Profile", edit_user_registration_path, 
                 class: "text-white hover:bg-emerald-600 hover:text-emerald-100 px-3 py-2 rounded-md text-sm font-medium transition duration-200" %>
             <%= button_to "Logout", destroy_user_session_path, 
                 method: :delete,
@@ -50,9 +52,13 @@
     <div class="px-2 pt-2 pb-3 space-y-1 bg-emerald-400 border-t border-emerald-600">
       <% if user_signed_in? %>
         <div class="text-emerald-900 text-sm px-3 py-2">
-          Welcome, <%= current_user.email %>
+          Welcome, <%= current_user.display_name %>
         </div>
-        <%= link_to "Dashboard", root_path, 
+        <%= link_to "My Portfolio", stocks_path, 
+            class: "text-emerald-900 hover:bg-emerald-500 hover:text-white block px-3 py-2 rounded-md text-base font-medium transition duration-200" %>
+        <%= link_to "Browse Stocks", browse_stocks_path, 
+            class: "text-emerald-900 hover:bg-emerald-500 hover:text-white block px-3 py-2 rounded-md text-base font-medium transition duration-200" %>
+        <%= link_to "Edit Profile", edit_user_registration_path, 
             class: "text-emerald-900 hover:bg-emerald-500 hover:text-white block px-3 py-2 rounded-md text-base font-medium transition duration-200" %>
         <%= button_to 'Logout', destroy_user_session_path, 
             method: :delete,
