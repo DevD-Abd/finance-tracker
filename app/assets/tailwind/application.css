@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+/* Custom styles can be added here */
+@layer base {
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer components {
+  /* Component-level styles */
+}
+
+@layer utilities {
+  /* Utility-level styles */
+}

@@ -1,0 +1,18 @@
+{
+  "css.validate": false,
+  "tailwindCSS.includeLanguages": {
+    "erb": "html",
+    "ruby": "html"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["class: ['\"]([^'\"]*)['\"]", 1],
+    ["class:\\s*['\"]([^'\"]*)['\"]", 1]
+  ],
+  "files.associations": {
+    "*.html.erb": "erb"
+  },
+  "emmet.includeLanguages": {
+    "erb": "html"
+  },
+  "tailwindCSS.emmetCompletions": true
+}

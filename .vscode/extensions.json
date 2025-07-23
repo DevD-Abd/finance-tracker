@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "bradlc.vscode-tailwindcss",
+    "rebornix.Ruby",
+    "kaiwood.endwise",
+    "misogi.ruby-rubocop",
+    "sianglim.slim",
+    "formulahendry.auto-rename-tag",
+    "esbenp.prettier-vscode"
+  ]
+}
