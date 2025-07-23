@@ -30,12 +30,12 @@
         <div class="flex-shrink-0">
           <% unless @is_current_user %>
             <% if @is_friend %>
-              <%= button_to "Remove Friend", friendship_path(@friendship), 
+              <%= button_to "Unfollow", friendship_path(@friendship), 
                            method: :delete,
-                           data: { confirm: "Remove #{@user.display_name} from your friends?" },
+                           data: { confirm: "Remove #{@user.display_name} from Following?" },
                            class: "px-4 py-2 bg-red-600 text-white font-medium rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition duration-200" %>
             <% else %>
-              <%= button_to "Add Friend", friendships_path, 
+              <%= button_to "Follow", friendships_path, 
                            method: :post,
                            params: { friend_id: @user.id },
                            class: "px-4 py-2 bg-emerald-600 text-white font-medium rounded-md hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 transition duration-200" %>
