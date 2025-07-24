@@ -1,7 +1,10 @@
   
   <!-- Flash Messages -->
   <% if notice %>
-    <div class="bg-emerald-50 border-l-4 border-emerald-400 text-emerald-800 px-4 sm:px-6 py-2 mx-4 mt-4 rounded-r-lg shadow-sm animate-fade-in" role="alert" data-controller="flash-message">
+    <div class="bg-emerald-50 border-l-4 border-emerald-400 text-emerald-800 px-4 sm:px-6 py-3 mx-4 mt-4 rounded-r-lg shadow-sm animate-fade-in opacity-0" 
+         role="alert" 
+         data-controller="flash-message"
+         style="animation: fadeIn 0.4s ease-out forwards;">
       <div class="flex items-center justify-between">
         <div class="flex items-center">
           <div class="flex-shrink-0">
@@ -33,7 +36,10 @@
   <% end %>
   
   <% if alert %>
-    <div class="bg-red-50 border-l-4 border-red-400 text-red-800 px-4 sm:px-6 py-2 mx-4 mt-4 rounded-r-lg shadow-sm animate-fade-in" role="alert" data-controller="flash-message">
+    <div class="bg-red-50 border-l-4 border-red-400 text-red-800 px-4 sm:px-6 py-3 mx-4 mt-4 rounded-r-lg shadow-sm animate-fade-in opacity-0" 
+         role="alert" 
+         data-controller="flash-message"
+         style="animation: fadeIn 0.4s ease-out forwards;">
       <div class="flex items-center justify-between">
         <div class="flex items-center">
           <div class="flex-shrink-0">
