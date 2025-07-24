@@ -1,4 +1,4 @@
-<nav class="bg-white shadow-sm border-b border-slate-200">
+<nav class="bg-white shadow-sm border-b border-slate-200" data-controller="mobile-menu">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
       <!-- App Name/Logo -->
@@ -32,7 +32,7 @@
                 <% end %>
                 <%= button_to 'Logout', destroy_user_session_path, 
                     method: :delete,
-                    class: "text-slate-500 hover:text-red-600 px-3 py-2 text-sm font-medium transition duration-200" %>
+                    class: "text-slate-500 cursor-pointer hover:text-red-600 px-3 py-2 text-sm font-medium transition duration-200" %>
               </div>
             </div>
           <% else %>
@@ -47,7 +47,11 @@
 
       <!-- Mobile menu button -->
       <div class="md:hidden">
-        <button type="button" class="mobile-menu-button text-slate-500 hover:text-slate-700 focus:outline-none focus:text-slate-700" aria-label="Main menu">
+        <button type="button" 
+                class="mobile-menu-button text-slate-500 hover:text-slate-700 focus:outline-none focus:text-slate-700" 
+                aria-label="Main menu"
+                data-action="click->mobile-menu#toggle"
+                data-mobile-menu-target="button">
           <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
             <path class="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
             <path class="close-icon hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -58,7 +62,7 @@
   </div>
 
   <!-- Mobile Menu -->
-  <div class="mobile-menu hidden md:hidden">
+  <div class="mobile-menu hidden md:hidden" data-mobile-menu-target="menu">
     <div class="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-slate-200">
       <% if user_signed_in? %>
         <div class="text-slate-500 text-sm px-3 py-2 font-medium">
@@ -74,7 +78,7 @@
             class: "text-slate-700 hover:bg-slate-100 hover:text-slate-900 block px-3 py-2 rounded-md text-base font-medium transition duration-200" %>
         <%= button_to 'Logout', destroy_user_session_path, 
             method: :delete,
-            class: "text-slate-700 hover:bg-red-50 hover:text-red-600 block px-3 py-2 rounded-md text-base font-medium transition duration-200 w-full text-left" %>
+            class: "text-slate-700 cursor-pointer hover:bg-red-50 hover:text-red-600 block px-3 py-2 rounded-md text-base font-medium transition duration-200 w-full text-left" %>
       <% else %>
         <%= link_to "Login", new_user_session_path, 
             class: "text-slate-700 hover:bg-slate-100 hover:text-slate-900 block px-3 py-2 rounded-md text-base font-medium transition duration-200" %>
@@ -84,21 +88,3 @@
     </div>
   </div>
 </nav>
-
-<script>
-  // Mobile menu toggle
-  document.addEventListener('DOMContentLoaded', function() {
-    const menuButton = document.querySelector('.mobile-menu-button');
-    const mobileMenu = document.querySelector('.mobile-menu');
-    const menuIcon = document.querySelector('.menu-icon');
-    const closeIcon = document.querySelector('.close-icon');
-
-    if (menuButton && mobileMenu) {
-      menuButton.addEventListener('click', function() {
-        mobileMenu.classList.toggle('hidden');
-        menuIcon.classList.toggle('hidden');
-        closeIcon.classList.toggle('hidden');
-      });
-    }
-  });
-</script>

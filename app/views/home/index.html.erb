@@ -1,27 +1,27 @@
 <div class="min-h-screen bg-slate-50">
   <!-- Hero Section -->
   <div class="relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32">
       <div class="text-center">
-        <h1 class="text-4xl sm:text-6xl font-bold text-slate-900 tracking-tight">
+        <h1 class="text-3xl sm:text-4xl lg:text-6xl font-bold text-slate-900 tracking-tight">
           Finance Tracker
         </h1>
-        <p class="mt-6 text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+        <p class="mt-4 sm:mt-6 text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed px-4">
           Take control of your investment portfolio with real-time stock tracking, 
           comprehensive analytics, and smart portfolio management tools.
         </p>
         
-        <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+        <div class="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-4 justify-center px-4">
           <% if user_signed_in? %>
             <%= link_to "View My Portfolio", stocks_path, 
-                class: "inline-flex items-center px-8 py-4 bg-slate-900 text-white text-lg font-medium rounded-xl hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 transition duration-200 shadow-lg" %>
+                class: "w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-slate-900 text-white text-lg font-medium rounded-xl hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 transition duration-200 shadow-lg" %>
             <%= link_to "Browse Stocks", browse_stocks_path, 
-                class: "inline-flex items-center px-8 py-4 bg-white text-slate-900 text-lg font-medium rounded-xl border border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 transition duration-200 shadow-sm" %>
+                class: "w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-white text-slate-900 text-lg font-medium rounded-xl border border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 transition duration-200 shadow-sm" %>
           <% else %>
             <%= link_to "Get Started", new_user_registration_path, 
-                class: "inline-flex items-center px-8 py-4 bg-slate-900 text-white text-lg font-medium rounded-xl hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 transition duration-200 shadow-lg" %>
+                class: "w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-slate-900 text-white text-lg font-medium rounded-xl hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 transition duration-200 shadow-lg" %>
             <%= link_to "Sign In", new_user_session_path, 
-                class: "inline-flex items-center px-8 py-4 bg-white text-slate-900 text-lg font-medium rounded-xl border border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 transition duration-200 shadow-sm" %>
+                class: "w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-white text-slate-900 text-lg font-medium rounded-xl border border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 transition duration-200 shadow-sm" %>
           <% end %>
         </div>
       </div>
@@ -29,7 +29,7 @@
   </div>
 
   <!-- Features Section -->
-  <div class="py-24 bg-white">
+  <div class="py-16 sm:py-24 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
         <h2 class="text-3xl font-bold text-slate-900 tracking-tight">
