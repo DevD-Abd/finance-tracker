@@ -13,19 +13,24 @@
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
     <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
 
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" href="/favicon.svg">
+    <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
+    <link rel="icon" href="/favicon.ico?v=2" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/favicon.svg?v=2">
+
+    <!-- Premium Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="bg-white text-gray-900">
+  <body class="bg-slate-50 text-slate-900 font-inter antialiased">
   <%= render "layouts/navigation" %>
   <%= render "layouts/flash" %>
-  <main class="container mx-auto px-4 py-6">
+  <main class="min-h-screen">
     <%= yield %>
   </main>
   </body>

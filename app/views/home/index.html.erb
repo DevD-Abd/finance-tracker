@@ -1,20 +1,101 @@
-<%# Sign Out %>
-<%= button_to 'Sign out', destroy_user_session_path, method: :delete %>
-<div class="min-h-screen bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
-  <div class="max-w-md mx-auto bg-white rounded-xl shadow-lg p-8">
-    <div class="text-center">
-      <h1 class="text-3xl font-bold text-gray-900 mb-4">Finance Tracker</h1>
-      <p class="text-lg text-gray-600 mb-6">
-        Welcome to your personal finance tracking application
-      </p>
-      <div class="space-y-4">
-        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200">
-          Get Started
-        </button>
-        <button class="w-full border border-gray-300 hover:bg-gray-50 text-gray-700 font-semibold py-3 px-6 rounded-lg transition duration-200">
-          Learn More
-        </button>
+<div class="min-h-screen bg-slate-50">
+  <!-- Hero Section -->
+  <div class="relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
+      <div class="text-center">
+        <h1 class="text-4xl sm:text-6xl font-bold text-slate-900 tracking-tight">
+          Finance Tracker
+        </h1>
+        <p class="mt-6 text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+          Take control of your investment portfolio with real-time stock tracking, 
+          comprehensive analytics, and smart portfolio management tools.
+        </p>
+        
+        <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+          <% if user_signed_in? %>
+            <%= link_to "View My Portfolio", stocks_path, 
+                class: "inline-flex items-center px-8 py-4 bg-slate-900 text-white text-lg font-medium rounded-xl hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 transition duration-200 shadow-lg" %>
+            <%= link_to "Browse Stocks", browse_stocks_path, 
+                class: "inline-flex items-center px-8 py-4 bg-white text-slate-900 text-lg font-medium rounded-xl border border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 transition duration-200 shadow-sm" %>
+          <% else %>
+            <%= link_to "Get Started", new_user_registration_path, 
+                class: "inline-flex items-center px-8 py-4 bg-slate-900 text-white text-lg font-medium rounded-xl hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 transition duration-200 shadow-lg" %>
+            <%= link_to "Sign In", new_user_session_path, 
+                class: "inline-flex items-center px-8 py-4 bg-white text-slate-900 text-lg font-medium rounded-xl border border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 transition duration-200 shadow-sm" %>
+          <% end %>
+        </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Features Section -->
+  <div class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-slate-900 tracking-tight">
+          Everything you need to track your investments
+        </h2>
+        <p class="mt-4 text-lg text-slate-600">
+          Professional-grade tools for personal portfolio management
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Feature 1 -->
+        <div class="text-center">
+          <div class="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-4">Real-time Tracking</h3>
+          <p class="text-slate-600">
+            Monitor your stocks with live price updates and track your portfolio performance in real-time.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="text-center">
+          <div class="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-4">Stock Discovery</h3>
+          <p class="text-slate-600">
+            Browse and discover new investment opportunities with our comprehensive stock database.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="text-center">
+          <div class="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-4">Social Features</h3>
+          <p class="text-slate-600">
+            Connect with friends and see their portfolios to discover new investment ideas and strategies.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-slate-900 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-white mb-4">
+        Ready to start tracking your investments?
+      </h2>
+      <p class="text-slate-300 text-lg mb-8">
+        Join thousands of investors who trust Finance Tracker for their portfolio management.
+      </p>
+      <% unless user_signed_in? %>
+        <%= link_to "Create Your Account", new_user_registration_path, 
+            class: "inline-flex items-center px-8 py-4 bg-white text-slate-900 text-lg font-medium rounded-xl hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900 transition duration-200 shadow-lg" %>
+      <% end %>
     </div>
   </div>
 </div>

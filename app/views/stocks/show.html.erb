@@ -1,16 +1,16 @@
-<div class="max-w-4xl mx-auto p-6">
-  <div class="bg-white rounded-lg shadow-md overflow-hidden">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
     <!-- Header -->
-    <div class="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-blue-500 to-blue-600">
+    <div class="px-6 py-8 bg-gradient-to-r from-slate-800 to-slate-900">
       <div class="flex items-center justify-between">
         <div>
-          <h1 class="text-2xl font-bold text-white"><%= @stock.ticker %></h1>
-          <p class="text-blue-100"><%= @stock.name %></p>
+          <h1 class="text-3xl font-bold text-white tracking-tight"><%= @stock.ticker %></h1>
+          <p class="text-slate-200 mt-2"><%= @stock.name %></p>
         </div>
         <div class="text-right">
-          <div class="text-3xl font-bold text-white">$<%= number_with_precision(@stock.last_price, precision: 2) %></div>
-          <div class="flex items-center justify-end space-x-2 text-blue-100 text-sm">
-            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+          <div class="text-4xl font-bold text-white">$<%= number_with_precision(@stock.last_price, precision: 2) %></div>
+          <div class="flex items-center justify-end space-x-2 text-slate-200 text-sm mt-2">
+            <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
             <span>Real-time Price</span>
           </div>
         </div>
@@ -21,63 +21,67 @@
     <div class="px-6 py-8">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Price Information -->
-        <div class="bg-gray-50 p-4 rounded-lg">
-          <h3 class="text-lg font-semibold text-gray-800 mb-4">Price Information</h3>
-          <div class="space-y-3">
-            <div class="flex justify-between">
-              <span class="text-gray-600">Last Price:</span>
-              <span class="font-semibold text-green-600">$<%= number_with_precision(@stock.last_price, precision: 2) %></span>
+        <div class="bg-slate-50 p-6 rounded-xl">
+          <h3 class="text-lg font-semibold text-slate-900 mb-4">Price Information</h3>
+          <div class="space-y-4">
+            <div class="flex justify-between items-center">
+              <span class="text-slate-600">Last Price:</span>
+              <span class="font-semibold text-slate-900">$<%= number_with_precision(@stock.last_price, precision: 2) %></span>
             </div>
-            <div class="flex justify-between">
-              <span class="text-gray-600">Last Updated:</span>
-              <span class="text-gray-800"><%= @stock.updated_at.strftime("%B %d, %Y at %I:%M %p") %></span>
+            <div class="flex justify-between items-center">
+              <span class="text-slate-600">Last Updated:</span>
+              <span class="text-slate-900"><%= @stock.updated_at.strftime("%B %d, %Y at %I:%M %p") %></span>
             </div>
           </div>
         </div>
 
         <!-- Company Information -->
-        <div class="bg-gray-50 p-4 rounded-lg">
-          <h3 class="text-lg font-semibold text-gray-800 mb-4">Company Information</h3>
-          <div class="space-y-3">
-            <div class="flex justify-between">
-              <span class="text-gray-600">Symbol:</span>
-              <span class="font-semibold text-gray-800"><%= @stock.ticker %></span>
+        <div class="bg-slate-50 p-6 rounded-xl">
+          <h3 class="text-lg font-semibold text-slate-900 mb-4">Company Information</h3>
+          <div class="space-y-4">
+            <div class="flex justify-between items-center">
+              <span class="text-slate-600">Symbol:</span>
+              <span class="font-semibold text-slate-900"><%= @stock.ticker %></span>
             </div>
-            <div class="flex justify-between">
-              <span class="text-gray-600">Company:</span>
-              <span class="text-gray-800"><%= @stock.name %></span>
+            <div class="flex justify-between items-center">
+              <span class="text-slate-600">Company:</span>
+              <span class="text-slate-900"><%= @stock.name %></span>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Actions -->
-      <div class="mt-8 flex gap-4">
-        <%= link_to "← Back to Portfolio", stocks_path, 
-                   class: "px-6 py-2 bg-gray-600 text-white font-medium rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-200" %>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <%= link_to "Back to Portfolio", stocks_path, 
+                   class: "px-6 py-3 bg-slate-600 text-white font-medium rounded-xl hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 transition duration-200" %>
         
         <% if @user_stock %>
-          <%= button_to "🔄 Refresh Price", stock_path(@stock.ticker), method: :patch,
-                       class: "px-6 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200" %>
+          <%= button_to "Refresh Price", stock_path(@stock.ticker), method: :patch,
+                       class: "px-6 py-3 bg-blue-600 text-white font-medium rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200" %>
           
           <%= button_to "Remove from Portfolio", untrack_stock_path(@stock), method: :delete,
                      data: { confirm: "Remove #{@stock.ticker} from your portfolio?" },
-                     class: "px-6 py-2 bg-red-600 text-white font-medium rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition duration-200" %>
+                     class: "px-6 py-3 bg-red-600 text-white font-medium rounded-xl hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition duration-200" %>
         <% else %>
           <%= button_to "Add to Portfolio", track_stock_path(@stock), method: :post,
-                     class: "px-6 py-2 bg-green-600 text-white font-medium rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition duration-200" %>
+                     class: "px-6 py-3 bg-emerald-600 text-white font-medium rounded-xl hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 transition duration-200" %>
         <% end %>
       </div>
     </div>
   </div>
 
   <!-- Price History Simulation -->
-  <div class="mt-6 bg-white rounded-lg shadow-md p-6">
-    <h3 class="text-lg font-semibold text-gray-800 mb-4">📊 Price Chart Simulation</h3>
-    <div class="bg-gray-100 p-8 rounded-lg text-center">
-      <div class="text-gray-600 text-4xl mb-4">📈</div>
-      <p class="text-gray-600">Price chart visualization would appear here</p>
-      <p class="text-sm text-gray-500 mt-2">Connect to a charting library like Chart.js for real charts</p>
+  <div class="mt-8 bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+    <h3 class="text-lg font-semibold text-slate-900 mb-4">Price Chart</h3>
+    <div class="bg-slate-50 p-12 rounded-xl text-center">
+      <div class="w-16 h-16 bg-slate-200 rounded-full flex items-center justify-center mx-auto mb-4">
+        <svg class="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+        </svg>
+      </div>
+      <p class="text-slate-600 text-lg mb-2">Price chart visualization would appear here</p>
+      <p class="text-sm text-slate-500">Connect to a charting library like Chart.js for real charts</p>
     </div>
   </div>
 </div>

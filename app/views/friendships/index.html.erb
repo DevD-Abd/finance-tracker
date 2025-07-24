@@ -1,136 +1,148 @@
-<div class="max-w-6xl mx-auto p-6">
-  <div class="flex justify-between items-center mb-6">
-    <h1 class="text-3xl font-bold text-gray-800">👥 My Friends</h1>
-    <%= link_to "← Back to Portfolio", stocks_path, 
-               class: "px-4 py-2 bg-gray-600 text-white font-medium rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-200" %>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <!-- Header Section -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-8">
+    <div>
+      <h1 class="text-3xl font-bold text-slate-900 tracking-tight">My Friends</h1>
+      <p class="mt-2 text-slate-600">Connect with other Finance Tracker users</p>
+    </div>
+    <%= link_to "Back to Portfolio", stocks_path, 
+               class: "mt-4 sm:mt-0 inline-flex items-center px-6 py-3 bg-slate-600 text-white font-medium rounded-xl hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 transition duration-200 shadow-sm" %>
   </div>
 
   <!-- Search Form -->
-  <div class="bg-white p-6 rounded-lg shadow-md mb-8">
-    <h2 class="text-xl font-semibold text-gray-700 mb-4">🔍 Search Users</h2>
-    <%= form_with url: friendships_path, method: :get, local: true, class: "flex gap-4 items-end" do %>
+  <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-8">
+    <h2 class="text-xl font-semibold text-slate-900 mb-4">Search Users</h2>
+    <%= form_with url: friendships_path, method: :get, local: true, class: "flex flex-col sm:flex-row gap-4" do %>
       <div class="flex-1">
-        <%= label_tag :search, "Search by name or email:", class: "block text-sm font-medium text-gray-700 mb-2" %>
+        <%= label_tag :search, "Search by name or email", class: "block text-sm font-medium text-slate-700 mb-2" %>
         <%= text_field_tag :search, @search_query, placeholder: "e.g., John Doe, jane@example.com", 
-                          class: "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" %>
+                          class: "w-full px-4 py-3 border border-slate-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-slate-500 transition duration-200" %>
       </div>
-      <%= submit_tag "Search", 
-                    class: "px-6 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200" %>
-      <% if @search_query.present? %>
-        <%= link_to "Clear", friendships_path, 
-                   class: "px-6 py-2 bg-gray-600 text-white font-medium rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-200" %>
-      <% end %>
+      <div class="flex gap-4 sm:items-end sm:mt-0 mt-4 sm:pb-0 pb-1">
+        <%= submit_tag "Search", 
+              class: "px-6 py-3 bg-slate-600 text-white font-medium rounded-xl hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 transition duration-200 shadow-sm" %>
+        <% if @search_query.present? %>
+          <%= link_to "Clear", friendships_path, 
+             class: "px-6 py-3 bg-slate-100 text-slate-700 font-medium rounded-xl hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 transition duration-200" %>
+        <% end %>
+      </div>
     <% end %>
     
-    <div class="mt-4 text-sm text-gray-600">
+    <div class="mt-4 text-sm text-slate-500">
       <% if @search_query.present? %>
-        <p><strong>Search results for:</strong> "<%= @search_query %>"</p>
+        <p>Search results for "<span class="font-medium text-slate-700"><%= @search_query %></span>"</p>
       <% else %>
-        <p><strong>Tip:</strong> Search by first name, last name, or email to find specific friends or users</p>
+        <p>Search by first name, last name, or email to find specific friends or users</p>
       <% end %>
     </div>
   </div>
 
   <!-- Current Friends Section -->
-  <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
-    <div class="px-6 py-4 border-b border-gray-200">
+  <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden mb-8">
+    <div class="px-6 py-4 border-b border-slate-200">
       <div class="flex items-center justify-between">
-        <h2 class="text-xl font-semibold text-gray-800">
-          <% if @search_query.present? %>
-            Following - Search Results (<%= @friends.count %> found)
-          <% else %>
-            Following (<%= @friends.count %>)
-          <% end %>
-        </h2>
+        <div>
+          <h2 class="text-xl font-semibold text-slate-900">
+            <% if @search_query.present? %>
+              Following - Search Results (<%= @friends.count %> found)
+            <% else %>
+              Following (<%= @friends.count %>)
+            <% end %>
+          </h2>
+          <p class="text-slate-600 text-sm mt-1">Users you're currently following</p>
+        </div>
         <div class="flex items-center space-x-2">
-          <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-          <span class="text-sm text-green-600 font-medium">Connected</span>
+          <div class="w-2 h-2 bg-emerald-500 rounded-full"></div>
+          <span class="text-sm text-emerald-600 font-medium">Connected</span>
         </div>
       </div>
     </div>
     
     <% if @friends.any? %>
-      <div class="divide-y divide-gray-200">
+      <div class="divide-y divide-slate-200">
         <% @friends.each do |friend| %>
-          <div class="px-6 py-4 hover:bg-gray-50 transition duration-200">
+          <div class="px-6 py-4 hover:bg-slate-50 transition duration-200">
             <div class="flex items-center justify-between">
               <div class="flex items-center space-x-4">
                 <div class="flex-shrink-0">
-                  <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
+                  <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center">
                     <span class="text-emerald-600 font-semibold text-sm">
                       <%= friend.display_name.first(2).upcase %>
                     </span>
                   </div>
                 </div>
                 <div>
-                  <%= link_to user_path(friend), class: "block hover:text-blue-600 transition duration-200" do %>
-                    <div class="text-lg font-semibold text-gray-900"><%= friend.display_name %></div>
-                    <div class="text-sm text-gray-600"><%= friend.email %></div>
-                    <div class="text-xs text-gray-500">
-                      Following since <%= current_user.friendships.find_by(friend: friend)&.created_at&.strftime("%B %Y") %>
+                  <%= link_to user_path(friend), class: "block hover:text-slate-900 transition duration-200" do %>
+                    <div class="text-lg font-semibold text-slate-900"><%= friend.display_name %></div>
+                    <div class="text-sm text-slate-500"><%= friend.email %></div>
+                    <div class="text-xs text-slate-400 mt-1">
+                      Tracking <%= friend.stocks.count %> stocks • Following since <%= current_user.friendships.find_by(friend: friend)&.created_at&.strftime("%B %Y") %>
                     </div>
                   <% end %>
                 </div>
               </div>
               <div class="text-right">
-                <div class="text-sm text-gray-600 mb-2">
-                  Tracking <%= friend.stocks.count %> stocks
-                </div>
                 <%= button_to "Unfollow", friendship_path(current_user.friendships.find_by(friend: friend)), 
                              method: :delete,
                              data: { confirm: "Remove #{friend.display_name} from Following?" },
-                             class: "text-xs text-red-600 hover:text-red-800 bg-transparent border-none p-0 cursor-pointer" %>
+                             class: "px-4 py-2 bg-red-50 text-red-600 font-medium rounded-lg hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition duration-200 text-sm" %>
               </div>
             </div>
           </div>
         <% end %>
       </div>
     <% else %>
-      <div class="px-6 py-12 text-center">
-        <div class="text-gray-400 text-6xl mb-4">👥</div>
-        <h3 class="text-lg font-medium text-gray-900 mb-2">No friends yet</h3>
-        <p class="text-gray-600 mb-4">Start connecting with other Finance Tracker users below!</p>
+      <div class="px-6 py-16 text-center">
+        <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-slate-900 mb-2">No friends yet</h3>
+        <p class="text-slate-600 mb-4">Start connecting with other Finance Tracker users below!</p>
       </div>
     <% end %>
   </div>
 
   <!-- Follows Section -->
-  <div class="bg-white rounded-lg shadow-md overflow-hidden">
-    <div class="px-6 py-4 border-b border-gray-200">
-      <h2 class="text-xl font-semibold text-gray-800">
-        <% if @search_query.present? %>
-          Follow More Users - Search Results (<%= @all_users.count %> found)
-        <% else %>
-          Follow More Users
-        <% end %>
-      </h2>
-      <p class="text-sm text-gray-600 mt-1">
-        <% if @search_query.present? %>
-          Users matching "<%= @search_query %>" that you can add as friends
-        <% else %>
-          Connect with other Finance Tracker users
-        <% end %>
-      </p>
+  <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+    <div class="px-6 py-4 border-b border-slate-200">
+      <div>
+        <h2 class="text-xl font-semibold text-slate-900">
+          <% if @search_query.present? %>
+            Follow More Users - Search Results (<%= @all_users.count %> found)
+          <% else %>
+            Follow More Users
+          <% end %>
+        </h2>
+        <p class="text-sm text-slate-600 mt-1">
+          <% if @search_query.present? %>
+            Users matching "<%= @search_query %>" that you can add as friends
+          <% else %>
+            Connect with other Finance Tracker users
+          <% end %>
+        </p>
+      </div>
     </div>
     
     <% if @all_users.any? %>
-      <div class="divide-y divide-gray-200">
+      <div class="divide-y divide-slate-200">
         <% @all_users.each do |user| %>
-          <div class="px-6 py-4 hover:bg-gray-50 transition duration-200">
+          <div class="px-6 py-4 hover:bg-slate-50 transition duration-200">
             <div class="flex items-center justify-between">
               <div class="flex items-center space-x-4">
                 <div class="flex-shrink-0">
-                  <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                    <span class="text-blue-600 font-semibold text-sm">
+                  <div class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center">
+                    <span class="text-slate-600 font-semibold text-sm">
                       <%= user.display_name.first(2).upcase %>
                     </span>
                   </div>
                 </div>
                 <div>
-                  <%= link_to user_path(user), class: "block hover:text-blue-600 transition duration-200" do %>
-                    <div class="text-lg font-semibold text-gray-900"><%= user.display_name %></div>
-                    <div class="text-sm text-gray-600"><%= user.email %></div>
-                    <div class="text-xs text-gray-500">
+                  <%= link_to user_path(user), class: "block hover:text-slate-900 transition duration-200" do %>
+                    <div class="text-lg font-semibold text-slate-900"><%= user.display_name %></div>
+                    <div class="text-sm text-slate-500"><%= user.email %></div>
+                    <div class="text-xs text-slate-400 mt-1">
                       Tracking <%= user.stocks.count %> stocks
                     </div>
                   <% end %>
@@ -140,17 +152,21 @@
                 <%= button_to "Follow", friendships_path, 
                              method: :post,
                              params: { friend_id: user.id },
-                             class: "px-4 py-2 bg-emerald-600 text-white font-medium rounded-md hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 transition duration-200" %>
+                             class: "px-4 py-2 bg-emerald-600 text-white font-medium rounded-lg hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 transition duration-200" %>
               </div>
             </div>
           </div>
         <% end %>
       </div>
     <% else %>
-      <div class="px-6 py-12 text-center">
-        <div class="text-gray-400 text-6xl mb-4">🎉</div>
-        <h3 class="text-lg font-medium text-gray-900 mb-2">You're friends with everyone!</h3>
-        <p class="text-gray-600">You've connected with all other Finance Tracker users.</p>
+      <div class="px-6 py-16 text-center">
+        <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-slate-900 mb-2">You're friends with everyone!</h3>
+        <p class="text-slate-600">You've connected with all other Finance Tracker users.</p>
       </div>
     <% end %>
   </div>
