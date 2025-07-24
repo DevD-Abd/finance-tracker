@@ -21,9 +21,9 @@ class StocksController < ApplicationController
         
         if potential_stock
           @stocks = [potential_stock]
-          flash.now[:notice] = "Found and added #{ticker} from Alpha Vantage API"
+          flash.now[:notice] = "Found and added #{ticker}"
         else
-          flash.now[:alert] = "No stock data found for '#{@search_query}' on Alpha Vantage. Please check the ticker symbol."
+          flash.now[:alert] = "No stock data found for '#{@search_query}'. Please check the ticker symbol."
           @stocks = []
         end
       end

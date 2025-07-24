@@ -29,7 +29,7 @@ class Stock < ApplicationRecord
     api_key = ENV['ALPHA_VANTAGE_API_KEY']
     return nil unless api_key.present?
     
-    Rails.logger.info("Fetching real-time data for #{ticker} from Alpha Vantage...")
+    Rails.logger.info("Fetching real-time data for #{ticker} ...")
     
     # Alpha Vantage Global Quote endpoint
     url = "https://www.alphavantage.co/query"
