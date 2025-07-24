@@ -1,0 +1,11 @@
+[build]
+builder = "heroku/buildpacks:20"
+
+[deploy]
+healthcheckPath = "/up"
+healthcheckTimeout = 300
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 10
+
+[[services]]
+name = "web"
