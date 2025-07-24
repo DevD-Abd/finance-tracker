@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   # Health check endpoint
   get "up" => "rails/health#show", as: :rails_health_check
 
+  # Home/Landing page
+  get 'home', to: 'home#index'
+
   # User profile routes
   resources :users, only: [:show], param: :id
 
@@ -21,5 +24,5 @@ Rails.application.routes.draw do
     end
   end
   
-  root to: 'stocks#index'
+  root to: 'home#index'
 end

@@ -1,16 +1,130 @@
 @import "tailwindcss";
 
-/* Custom styles can be added here */
+/* Custom styles for mobile responsiveness and accessibility */
 @layer base {
   body {
     font-family: system-ui, -apple-system, sans-serif;
   }
+  
+  /* Improve touch targets for mobile */
+  button, 
+  input[type="submit"], 
+  input[type="button"],
+  .btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Better tap targets for links on mobile */
+  a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  /* Prevent zoom on inputs on iOS */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="url"],
+  select,
+  textarea {
+    font-size: 16px;
+  }
 }
 
 @layer components {
-  /* Component-level styles */
+  /* Mobile-friendly form components */
+  .form-input {
+    @apply w-full px-4 py-3 border border-slate-300 rounded-xl shadow-sm 
+           focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-slate-500 
+           transition duration-200 text-base;
+  }
+  
+  .btn-primary {
+    @apply px-6 py-3 bg-slate-900 text-white font-medium rounded-xl 
+           hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-500 
+           focus:ring-offset-2 transition duration-200 shadow-sm;
+  }
+  
+  .btn-secondary {
+    @apply px-6 py-3 bg-slate-100 text-slate-700 font-medium rounded-xl 
+           hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-500 
+           focus:ring-offset-2 transition duration-200;
+  }
+  
+  /* Mobile card spacing */
+  .card {
+    @apply bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-6;
+  }
+  
+  /* Responsive grid layouts */
+  .responsive-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6;
+  }
+  
+  /* Mobile navigation improvements */
+  .nav-link {
+    @apply block px-3 py-2 rounded-md text-base font-medium transition duration-200
+           text-slate-700 hover:bg-slate-100 hover:text-slate-900;
+  }
 }
 
 @layer utilities {
-  /* Utility-level styles */
+  /* Custom utilities for better mobile UX */
+  .text-responsive {
+    @apply text-sm sm:text-base;
+  }
+  
+  .heading-responsive {
+    @apply text-xl sm:text-2xl lg:text-3xl;
+  }
+  
+  .container-responsive {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Safe area insets for mobile devices */
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  /* Hide scrollbars but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Improved focus states for accessibility */
+  .focus-visible {
+    @apply focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2;
+  }
+  
+  /* Flash message animations */
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+  }
+}
+
+/* Keyframe animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
